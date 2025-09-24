@@ -1,0 +1,25 @@
+{
+  "name": "film-tv-database-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "seed": "ts-node seed.ts"
+  },
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "graphql": "^16.8.1",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
+
+
+
+
