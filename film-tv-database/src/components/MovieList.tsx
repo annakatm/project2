@@ -1,6 +1,5 @@
 import { MovieCard } from "./MovieCard";
 
-
 interface Movie {
   id: number;
   title: string;
@@ -15,7 +14,7 @@ interface MovieListProps {
 
 function MovieList({ movies, onSelect }: MovieListProps) {
   return (
-    <div className="grid">
+    <div className="movie-grid">
       {movies.map((movie) => (
         <MovieCard
           key={movie.id}

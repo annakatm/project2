@@ -1,4 +1,4 @@
-import "./MovieModal.css";
+//import "./MovieModal.css";
 
 interface MovieModalProps {
   title: string;

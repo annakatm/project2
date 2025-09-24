@@ -1,4 +1,4 @@
-import "./MovieCard.css";
+//import "./MovieCard.css";
 
 interface MovieCardProps {
   id: number;

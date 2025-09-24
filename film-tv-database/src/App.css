@@ -1,13 +1,13 @@
 .app {
-  font-family: Arial, sans-serif;
+  max-width: 1200px;   /* max width of content */
+  margin: 0 auto;      /* center the whole container */
   padding: 2rem;
-  max-width: 800px;
-  margin: auto;
+  text-align: center;  /* centers headings, search bar, etc. */
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 input {
@@ -18,32 +18,53 @@ input {
   border-radius: 8px;
 }
 
+/* grid */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
+  justify-items: center; /* centers each card in its grid cell */
 }
 
+/* cards */
 .card {
-  background: #f8f9fa;
+  background: #f0f0f0; /* light gray background instead of pure white */
+  color: #111;          /* dark text for visibility */
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, background 0.2s;
 }
 
 .card:hover {
   transform: scale(1.05);
-  background: #e9ecef;
+  background: #e0e0e0; /* slightly darker on hover */
 }
 
+
+/* Titles */
+.card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 14px; /* slightly smaller font */
+  text-align: center;
+}
+
+.card p {
+  margin: 0;
+  font-size: 12px; /* smaller font */
+  color: #555;
+  text-align: center;
+}
+
+/* Modal */
 .modal {
   position: fixed;
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
   background: white;
+  color: #111;          /* dark text */
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 5px 20px rgba(0,0,0,0.3);

@@ -1,3 +1,4 @@
+// server/resolvers.ts
 import { openDb } from "./db";
 
 type MoviesArgs = {
@@ -20,6 +21,7 @@ export const resolvers = {
         where.push("LOWER(title) LIKE ?");
         params.push(`%${args.search.toLowerCase()}%`);
       }
+
       if (args.genre && args.genre.trim() !== "") {
         where.push("genre = ?");
         params.push(args.genre);
@@ -45,7 +47,7 @@ export const resolvers = {
       return rows;
     },
 
-    movie: async (_: unknown, args: { id: number }) => {
+    movie: async (_: unknown, args: { id: string }) => {
       const db = await openDb();
       const row = await db.get("SELECT * FROM movies WHERE id = ?", [args.id]);
       await db.close();
@@ -53,7 +55,3 @@ export const resolvers = {
     },
   },
 };
-
-
-
-
