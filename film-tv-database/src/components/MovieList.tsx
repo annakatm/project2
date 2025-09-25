@@ -1,3 +1,4 @@
+// src/components/MovieList.tsx
 import { MovieCard } from "./MovieCard";
 
 interface Movie {
@@ -5,11 +6,12 @@ interface Movie {
   title: string;
   year: number;
   genre: string;
+  rating: number; // global rating
 }
 
 interface MovieListProps {
   movies: Movie[];
-  onSelect: (id: number) => void;
+  onSelect: (id: number) => void; // opens modal
 }
 
 function MovieList({ movies, onSelect }: MovieListProps) {
@@ -22,7 +24,7 @@ function MovieList({ movies, onSelect }: MovieListProps) {
           title={movie.title}
           year={movie.year}
           genre={movie.genre}
-          onSelect={onSelect}
+          onSelect={onSelect} // open modal
         />
       ))}
     </div>
