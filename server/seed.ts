@@ -4,9 +4,9 @@ import { openDb } from "./db";
 async function seed() {
   const db = await openDb();
 
-  await db.exec(`
-    DROP TABLE IF EXISTS movies;
-  `);
+  await db.exec(`DROP TABLE IF EXISTS movies`);
+  await db.exec(`DROP TABLE IF EXISTS movie_ratings`);
+  await db.exec(`DROP TABLE IF EXISTS user_favorites`);
 
   await db.exec(`
     CREATE TABLE IF NOT EXISTS movies (
@@ -20,6 +20,26 @@ async function seed() {
     )
   `);
 
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS movie_ratings (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      movie_id INTEGER NOT NULL,
+      user_id TEXT NOT NULL,
+      value REAL NOT NULL,
+      UNIQUE(movie_id, user_id),
+      FOREIGN KEY(movie_id) REFERENCES movies(id)
+    )
+  `);
+
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS user_favorites (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id TEXT NOT NULL,
+      movie_id INTEGER NOT NULL,
+      UNIQUE(user_id, movie_id),
+      FOREIGN KEY(movie_id) REFERENCES movies(id)
+    )
+  `);
   const movies = [
     // Christopher Nolan
     { title: "Interstellar", year: 2014, genre: "Sci-Fi", director: "Christopher Nolan", rating: 8.6, description: "Explorers travel through a wormhole in space to ensure humanity's survival." },
@@ -58,6 +78,7 @@ async function seed() {
   const insert = await db.prepare(
     `INSERT INTO movies (title, year, genre, director, rating, description) VALUES (?, ?, ?, ?, ?, ?)`
   );
+
   try {
     for (const m of movies) {
       await insert.run(m.title, m.year, m.genre, m.director, m.rating, m.description);
@@ -66,12 +87,11 @@ async function seed() {
     await insert.finalize();
   }
 
-  console.log("✅ Seeded movies database!");
+  console.log("✅ Seeded movies database with ratings and favorites support!");
   await db.close();
 }
 
 seed();
-
 
 
 
